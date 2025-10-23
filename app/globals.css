@@ -2,25 +2,63 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a1a1a;
+  --mint-primary: #a0e6d2;
+  --mint-light: #d4f4e8;
+  --mint-dark: #7dd3b7;
+  --mint-accent: #5bc09f;
+  --gray-light: #f8f9fa;
+  --gray-medium: #6c757d;
+}
+[data-theme="dark"] {
+  --background: #0f1714;      /* deep charcoal with greenish undertone */
+  --foreground: #f0fdfa;      /* near-white mint tint for text */
+  --mint-primary: #5bc09f;    /* becomes the accent glow color */
+  --mint-light: #324c44;      /* muted mint surface */
+  --mint-dark: #a0e6d2;       /* highlight text or icons */
+  --mint-accent: #7dd3b7;     /* soft hover mint */
+  --gray-light: #1f2925;      /* card surface or containers */
+  --gray-medium: #9caea9;     /* subdued text color */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-mint-primary: var(--mint-primary);
+  --color-mint-light: var(--mint-light);
+  --color-mint-dark: var(--mint-dark);
+  --color-mint-accent: var(--mint-accent);
+  --color-gray-light: var(--gray-light);
+  --color-gray-medium: var(--gray-medium);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mint-primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mint-accent);
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
