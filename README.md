@@ -45,6 +45,16 @@ A modern, feature-rich feedback management platform built with Next.js 15, desig
 - **Real-time visitor statistics** displayed on landing page
 - **MongoDB-based storage** for accurate metrics
 
+### 🤖 AI Chatbot
+- **Gemini Flash 2.0 powered** intelligent assistant
+- **Context-aware responses** about platform features
+- **Conversation history** for natural dialogue flow
+- **Quick question suggestions** for common queries
+- **Always accessible** floating chat button on all pages
+- **Real-time responses** with typing indicators
+- **Built-in rate limiting** (10 messages/min) to protect API usage
+- **Beautiful UI** matching the mint-green theme
+
 ### 🎭 User Experience
 - **Skeleton loading states** for smooth content transitions
 - **Custom dialogs** for authentication prompts
@@ -88,7 +98,12 @@ NEXTAUTH_SECRET=your_nextauth_secret_key
 # GitHub OAuth
 GITHUB_ID=your_github_oauth_app_id
 GITHUB_SECRET=your_github_oauth_app_secret
+
+# Gemini AI (for Chatbot)
+GEMINI_API_KEY=your_gemini_api_key
 ```
+
+**Note:** Get your Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
 
 4. **Run the development server**
 ```bash
@@ -109,7 +124,8 @@ feedback-board/
 │   │   ├── feedback/              # Feedback CRUD endpoints
 │   │   │   └── [id]/
 │   │   │       └── comments/      # Comment endpoints
-│   │   └── visitors/              # Visitor tracking
+│   │   ├── visitors/              # Visitor tracking
+│   │   └── chatbot/               # Gemini AI chatbot endpoint
 │   ├── feedback/
 │   │   ├── page.tsx               # Feedback list page
 │   │   ├── new/                   # Create feedback form
@@ -123,6 +139,7 @@ feedback-board/
 │   ├── FeedbackModal.tsx          # Modal for feedback details
 │   ├── FeedbackForm.tsx           # Create/edit feedback form
 │   ├── CommentList.tsx            # Comment display component
+│   ├── Chatbot.tsx                # AI chatbot component
 │   ├── Navbar.tsx                 # Navigation with auth
 │   ├── ThemeToggle.tsx            # Dark mode toggle
 │   ├── SubmitDialog.tsx           # Auth-aware submission dialog
@@ -161,6 +178,10 @@ feedback-board/
 - **NextAuth.js 4.24.11** - Authentication solution
 - **GitHub OAuth** - OAuth provider
 
+### AI & Machine Learning
+- **Google Generative AI** - Gemini Flash 2.0 for chatbot
+- **Context-aware AI** - Intelligent conversation handling
+
 ### Form Handling
 - **react-hook-form** - Form state management
 - **zod** - Schema validation
@@ -180,6 +201,11 @@ feedback-board/
 ### Visitors
 - `GET /api/visitors` - Get total visitor count
 - `POST /api/visitors` - Track new visitor
+
+### Chatbot
+- `POST /api/chatbot` - Send message to AI chatbot
+  - Request body: `{ message: string, conversationHistory: array }`
+  - Response: `{ message: string, success: boolean }`
 
 ### Authentication
 - `GET/POST /api/auth/[...nextauth]` - NextAuth endpoints

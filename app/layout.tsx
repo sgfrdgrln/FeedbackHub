@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Chatbot from "@/components/Chatbot";
 import NextAuthProvider from "@/components/NextAuthProvider";
 import { ThemeProvider } from "next-themes";
 
@@ -35,6 +36,7 @@ export default function RootLayout({
           <NextAuthProvider>
             <Navbar />
             {children}
+            <Chatbot />
           </NextAuthProvider>
         </ThemeProvider>
       </body>
