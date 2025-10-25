@@ -1,9 +1,9 @@
-import NextAuth, { AuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import { connectToDatabase } from "@/backend/db/connection";
 import User from "@/backend/models/User";
 
-export const authOptions: AuthOptions = {
+const handler = NextAuth({
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID!,
@@ -15,17 +15,11 @@ export const authOptions: AuthOptions = {
     signIn: "/login",
   },
   callbacks: {
-    /**
-     * 🔹 When a user signs in
-     * Syncs user data with MongoDB
-     */
     async signIn({ user, account, profile }) {
       try {
         await connectToDatabase();
 
-        // Extract GitHub username (login)
         const githubUsername = (profile as any)?.login;
-
         let existingUser = await User.findOne({ email: user.email });
 
         if (!existingUser) {
@@ -37,9 +31,8 @@ export const authOptions: AuthOptions = {
             provider: account?.provider,
           });
         } else {
-          // Optional: update user details if they changed on GitHub
           existingUser.name = user.name || existingUser.name;
-           existingUser.username = githubUsername || existingUser.username;
+          existingUser.username = githubUsername || existingUser.username;
           existingUser.image = user.image || existingUser.image;
           await existingUser.save();
         }
@@ -51,9 +44,6 @@ export const authOptions: AuthOptions = {
       }
     },
 
-    /**
-     * 🔹 Adds the MongoDB user ID + GitHub username to the JWT
-     */
     async jwt({ token, user, profile }) {
       if (user) {
         await connectToDatabase();
@@ -66,9 +56,6 @@ export const authOptions: AuthOptions = {
       return token;
     },
 
-    /**
-     * 🔹 Adds user ID + username to the session
-     */
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
@@ -77,7 +64,7 @@ export const authOptions: AuthOptions = {
       return session;
     },
   },
-};
+});
 
-const handler = NextAuth(authOptions);
+// ✅ Correct route exports
 export { handler as GET, handler as POST };
