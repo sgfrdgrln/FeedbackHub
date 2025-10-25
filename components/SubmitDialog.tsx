@@ -93,7 +93,7 @@ export default function SubmitDialog({ isOpen, onClose }: SubmitDialogProps) {
             <p className="text-center mb-6 leading-relaxed" style={{ color: 'var(--gray-medium)' }}>
               {status === 'authenticated' ? (
                 <>
-                  You're all set! Share your ideas and help us build something amazing together.
+                  You&apos;re all set! Share your ideas and help us build something amazing together.
                 </>
               ) : (
                 <>
@@ -119,7 +119,7 @@ export default function SubmitDialog({ isOpen, onClose }: SubmitDialogProps) {
                       clipRule="evenodd"
                     />
                   </svg>
-                  What you'll get:
+                  What you&apos;ll get:
                 </h4>
                 <ul className="space-y-2 text-sm" style={{ color: 'var(--foreground)' }}>
                   <li className="flex items-start gap-2">

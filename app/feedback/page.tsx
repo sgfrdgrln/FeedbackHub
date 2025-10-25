@@ -4,7 +4,6 @@ import FeedbackCard from '@/components/FeedbackCard';
 import { FeedbackSkeletonList } from '@/components/FeedbackSkeleton';
 import SubmitDialog from '@/components/SubmitDialog';
 import FeedbackModal from '@/components/FeedbackModal';
-import Link from 'next/link';
 import { useState } from 'react';
 import { useFeedback } from '@/hooks/useFeedback';
 import { IFeedback } from '@/backend/types/IFeedback';
