@@ -34,30 +34,30 @@ export default function FeedbackModal({ isOpen, onClose, feedback }: FeedbackMod
 
   // Load comments when modal opens
   useEffect(() => {
+    const loadComments = async () => {
+      if (!feedback) return;
+      
+      const feedbackId = feedback._id || feedback.id;
+      if (!feedbackId) return;
+      
+      setIsLoadingComments(true);
+      try {
+        const response = await fetch(`/api/feedback/${feedbackId}/comments`);
+        if (response.ok) {
+          const data = await response.json();
+          setComments(data.comments || []);
+        }
+      } catch (error) {
+        console.error('Error loading comments:', error);
+      } finally {
+        setIsLoadingComments(false);
+      }
+    };
+
     if (isOpen && feedback) {
       loadComments();
     }
   }, [isOpen, feedback]);
-
-  const loadComments = async () => {
-    if (!feedback) return;
-    
-    const feedbackId = feedback._id || feedback.id;
-    if (!feedbackId) return;
-    
-    setIsLoadingComments(true);
-    try {
-      const response = await fetch(`/api/feedback/${feedbackId}/comments`);
-      if (response.ok) {
-        const data = await response.json();
-        setComments(data.comments || []);
-      }
-    } catch (error) {
-      console.error('Error loading comments:', error);
-    } finally {
-      setIsLoadingComments(false);
-    }
-  };
 
   const handleSubmitComment = async (e: React.FormEvent) => {
     e.preventDefault();

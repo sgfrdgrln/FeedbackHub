@@ -70,7 +70,7 @@ export default function NewFeedbackPage() {
           <ul className="space-y-2" style={{ color: 'var(--foreground)' }}>
             <li className="flex items-start gap-2">
               <span className="mt-1" style={{ color: 'var(--mint-accent)' }}>•</span>
-              <span>Be clear and specific about what you're suggesting or reporting</span>
+              <span>Be clear and specific about what you&apos;re suggesting or reporting</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="mt-1" style={{ color: 'var(--mint-accent)' }}>•</span>

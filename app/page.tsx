@@ -1,16 +1,12 @@
 'use client';
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useVisitors } from "@/hooks/useVisitors";
 
 export default function Home() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const { visitorCount, loading } = useVisitors();
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
 
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, var(--background), var(--mint-light), var(--mint-primary))' }}>
